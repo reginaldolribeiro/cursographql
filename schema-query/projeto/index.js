@@ -5,19 +5,33 @@ const usuarios = [
     id: 1,
     nome: "Joao Silva",
     email: "jsilva@gmail.com",
-    idade: 29
+    idade: 29,
+    perfil_id: 1
   },
   {
     id: 2,
     nome: "Rafael Junior",
     email: "rafaeljunior@gmail.com",
-    idade: 31
+    idade: 31,
+    perfil_id: 2
   },
   {
     id: 3,
     nome: "Daniela Smith",
     email: "danismith@gmail.com",
-    idade: 24
+    idade: 24,
+    perfil_id: 1
+  }
+];
+
+const perfis = [
+  {
+    id: 1,
+    nome: "Comum"
+  },
+  {
+    id: 2,
+    nome: "Administrador"
   }
 ];
 
@@ -32,6 +46,12 @@ const typeDefs = gql`
     salario: Float
     vip: Boolean
     blabla: String
+    perfil: Perfil
+  }
+
+  type Perfil {
+    id: ID
+    nome: String
   }
 
   type Produto {
@@ -51,6 +71,9 @@ const typeDefs = gql`
     produtoEmDestaque: Produto
     numerosMegaSena: [Int!]!
     usuarios: [Usuario]
+    usuario(id: ID): Usuario
+    perfis: [Perfil]
+    perfil(id: ID): Perfil
   }
 `;
 
@@ -70,6 +93,10 @@ const resolvers = {
     },
     blabla(usuario) {
       return "Opa blablablah";
+    },
+    perfil(usuario) {
+      const selecionados = perfis.filter(p => p.id == usuario.perfil_id);
+      return selecionados ? selecionados[0] : null;
     }
   },
   Query: {
@@ -106,6 +133,17 @@ const resolvers = {
     },
     usuarios() {
       return usuarios;
+    },
+    usuario(_, args) {
+      const selecionados = usuarios.filter(u => u.id == args.id);
+      return selecionados ? selecionados[0] : null;
+    },
+    perfis() {
+      return perfis;
+    },
+    perfil(_, args) {
+      const selecionados = perfis.filter(p => p.id == args.id);
+      return selecionados ? selecionados[0] : null;
     }
   }
 };
