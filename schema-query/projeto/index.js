@@ -10,6 +10,14 @@ const typeDefs = gql`
     idade: Int
     salario: Float
     vip: Boolean
+    blabla: String
+  }
+
+  type Produto {
+    nome: String!
+    preco: Float!
+    desconto: Float
+    precoComDesconto: Float
   }
 
   # Pontos de entrada da sua API;
@@ -18,10 +26,29 @@ const typeDefs = gql`
     # horaCerta: String
     horaCerta: Date!
     usuarioLogado: Usuario
+    blabla: String
+    produtoEmDestaque: Produto
   }
 `;
 
 const resolvers = {
+  Produto: {
+    precoComDesconto(produto) {
+      if (produto.desconto) {
+        return produto.preco * (1 - produto.desconto);
+      } else {
+        return produto.desconto;
+      }
+    }
+  },
+  Usuario: {
+    salario(usuario) {
+      return usuario.salario_real;
+    },
+    blabla(usuario) {
+      return "Opa blablablah";
+    }
+  },
   Query: {
     ola() {
       return "Basta retornar uma string";
@@ -36,8 +63,15 @@ const resolvers = {
         nome: "Ana da Web",
         email: "anadaweb@gmail.com",
         idade: 23,
-        salario: 1245.45,
+        salario_real: 1245.45,
         vip: true
+      };
+    },
+    produtoEmDestaque() {
+      return {
+        nome: "Produto",
+        preco: 100.0,
+        desconto: 0.5
       };
     }
   }
