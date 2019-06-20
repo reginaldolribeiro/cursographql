@@ -1,14 +1,13 @@
-# Pontos de entrada da sua API;
-type Query {
-  ola: String!
-  # horaCerta: String
-  horaCerta: Date!
-  usuarioLogado: Usuario
-  blabla: String
-  produtoEmDestaque: Produto
-  numerosMegaSena: [Int!]!
-  usuarios: [Usuario]
-  usuario(id: ID): Usuario
-  perfis: [Perfil]
-  perfil(id: ID): Perfil
+# Pontos de entrada da sua API!
+type Query{
+    ola: String!
+    horaAtual: Date!
+    usuarioLogado: Usuario
+    produtoEmDestaque: Produto
+    # obrigatorio retornar um array e obrigatorio que o array contenha elementos
+    numerosMegaSena: [Int!]!
+    usuarios: [Usuario]
+    usuario(id: ID): Usuario
+    perfis: [Perfil]
+    perfil(id: ID): Perfil
 }

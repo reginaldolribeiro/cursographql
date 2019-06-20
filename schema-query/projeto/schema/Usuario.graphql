@@ -1,15 +1,22 @@
-type Usuario {
-  id: ID
-  nome: String!
-  email: String!
-  idade: Int
-  salario: Float
-  vip: Boolean
-  blabla: String
-  perfil: Perfil
+enum UsuarioStatus {
+    ATIVO
+    INATIVO
+    BLOQUEADO
 }
 
 type Perfil {
-  id: ID
-  nome: String
+    id: ID!
+    nome: String!
+}    
+
+type Usuario {
+    id: ID
+    nome: String!
+    email: String!
+    idade: Int
+    salario: Float
+    vip: Boolean
+    blabla: String
+    perfil: Perfil
+    status: UsuarioStatus
 }
