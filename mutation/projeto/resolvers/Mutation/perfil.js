@@ -7,7 +7,7 @@ function indicePerfil(filtro) {
     return perfis.findIndex(p => p.id === id);
   } else if(nome){
     return perfis.findIndex(p => p.nome === nome)
-}
+    }
   return -1;
 }
 
