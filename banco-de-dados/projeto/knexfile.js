@@ -6,7 +6,7 @@ module.exports = {
     connection: {
       database: 'exercicios',
       user:     'root',
-      password: '123456'
+      password: '12345678'
     },
     pool: {
       min: 2,
